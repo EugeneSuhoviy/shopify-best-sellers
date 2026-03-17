@@ -3406,5 +3406,38 @@
         "name": "Collapsible content"
       }
     }
+    ,
+    "best-sellers": {
+      "name": "Best sellers",
+      "settings": {
+        "section_label": {
+          "label": "Section label",
+          "default": "Best sellers"
+        },
+        "title": {
+          "label": "Title",
+          "default": "Trending products"
+        }
+      },
+      "blocks": {
+        "collection": {
+          "name": "Collection",
+          "settings": {
+            "collection": {
+              "label": "Collection"
+            },
+            "collection_title": {
+              "label": "Collection title"
+            },
+            "product": {
+              "label": "Product"
+            }
+          }
+        }
+      },
+      "presets": {
+        "name": "Best sellers"
+      }
+    }
   }
 }

@@ -384,6 +384,15 @@
       "max_error": "This item has a maximum of {{ max }}",
       "step_error": "You can only add this item in increments of {{ step }}"
     }
+    ,
+    "best_sellers": {
+      "wishlist_added": "{{ product_name }} has been added to the your wishlist.",
+      "accessibility": {
+        "add_to_wishlist": "Add {{ product_name }} to wishlist",
+        "add_to_cart": "Add {{ product_name }} to cart",
+        "close_wishlist_notification": "Close wishlist notification"
+      }
+    }
   },
   "localization": {
     "country_label": "Country/region",
