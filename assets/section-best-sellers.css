@@ -29,10 +29,6 @@
   margin-bottom: 24px;
 }
 
-.best-sellers__image-link {
-    display: flex;
-}
-
 @media (min-width: 990px) {
   .best-sellers__header {
     margin-bottom: 64px;
