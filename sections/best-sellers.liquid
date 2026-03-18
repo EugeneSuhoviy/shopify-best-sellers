@@ -14,7 +14,7 @@
   <div class="best-sellers__inner page-width">
     <div class="best-sellers__content">
       {%- comment -%} Navigation Tabs {%- endcomment -%}
-      <div class="best-sellers__tabs--wrap">
+      <div class="best-sellers__tabs--wrap scroll-trigger animate--slide-in">
         <header class="best-sellers__header">
           {%- if section.settings.section_label != blank -%}
             <p class="best-sellers__label">{{ section.settings.section_label | escape }}</p>
@@ -43,8 +43,8 @@
             >
               <span>{{ tab_title | escape }}</span>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14.43 5.92999L20.5 12L14.43 18.07" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M3.5 12H20.33" stroke="black" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M14.43 5.92999L20.5 12L14.43 18.07" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.5 12H20.33" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
           {%- endfor -%}
@@ -52,7 +52,7 @@
       </div>
 
       {%- comment -%} Product Cards Panels {%- endcomment -%}
-      <div class="best-sellers__panels">
+      <div class="best-sellers__panels scroll-trigger animate--slide-in" role="tabpanel-container">
         {%- for block in blocks -%}
           {%- liquid
             assign coll = block.settings.collection
@@ -72,7 +72,6 @@
             {%- if product -%}
               <article class="best-sellers__card" data-product-title="{{ product.title | escape }}">
                 <div class="best-sellers__media-container">
-                  
                   {%- comment -%} Badges {%- endcomment -%}
                   <div class="best-sellers__badges">
                     {%- for tag in product.tags limit: 3 -%}
@@ -98,7 +97,11 @@
                         {{
                           product.featured_media
                           | image_url: width: 816
-                          | image_tag: loading: 'lazy', class: 'best-sellers__image', alt: product.title
+                          | image_tag:
+                            loading: 'eager',
+                            fetchpriority: 'high',
+                            class: 'best-sellers__image',
+                            alt: product.title
                         }}
                       </picture>
                     {%- else -%}
@@ -114,12 +117,12 @@
                       </svg>
                     </button>
 
-                    {%- assign first_variant = product.first_available_variant -%}
+                    {%- assign current_variant = product.selected_or_first_available_variant -%}
                     <button
                       class="action-btn"
                       data-action="add-to-cart"
-                      data-variant-id="{{ first_variant.id }}"
-                      {% unless first_variant.available %}
+                      data-variant-id="{{ current_variant.id }}"
+                      {% unless product.available %}
                         disabled
                       {% endunless %}
                       aria-label="Add to Cart"

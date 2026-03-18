@@ -45,15 +45,18 @@
       const activePanel = this.container.querySelector('.best-sellers__panel.is-active');
       const productName = activePanel.querySelector('.best-sellers__card').dataset.productTitle;
       const template = this.container.dataset.wishlistTemplate;
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
 
       this.modalText.textContent = template.replace('[NAME]', productName);
       this.modalWrapper.classList.add('is-open');
       document.body.classList.add('scroll-locked');
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
     }
 
     closeModal() {
       this.modalWrapper.classList.remove('is-open');
       document.body.classList.remove('scroll-locked');
+      document.body.style.paddingRight = '0px';
     }
 
     async addToCart(btn) {
